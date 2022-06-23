@@ -1,5 +1,6 @@
 package dev.cross.models;
 
+import dev.cross.types.approve_type;
 import dev.cross.types.event_type;
 
 public class Request {
@@ -10,6 +11,7 @@ public class Request {
 	private String description;
 	private int money;
 	private String grade;
+	private approve_type approval;
 	
 	public Request() {
 		super();
@@ -70,6 +72,14 @@ public class Request {
 
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+
+	public approve_type getApproval() {
+		return approval;
+	}
+
+	public void setApproval(approve_type approval) {
+		this.approval = approval;
 	}
 	
 	
