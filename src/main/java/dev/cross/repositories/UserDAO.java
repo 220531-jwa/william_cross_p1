@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import dev.cross.models.User;
 import dev.cross.utils.ConnectionUtil;
@@ -36,7 +34,7 @@ public class UserDAO {
 	}
 	
 	public User getUserByUsername(String username) {
-		String sql = "select * from users where username = ?";
+		String sql = "select * from requestsystem.users where username = ?";
 		
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
