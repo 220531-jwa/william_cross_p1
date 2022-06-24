@@ -8,13 +8,13 @@ public class User {
 	private String username;
 	private String pass;
 	private boolean manager;
-	private int reimburseUsed;
+	private float reimburseUsed;
 	
 	public User() {
 		super();
 	}
 	
-	public User(int id, String firstName, String lastName, String username, String pass, boolean manager, int reimburseUsed) {
+	public User(int id, String firstName, String lastName, String username, String pass, boolean manager, float reimburseUsed) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -73,11 +73,11 @@ public class User {
 		this.manager = manager;
 	}
 
-	public int getReimburseUsed() {
+	public float getReimburseUsed() {
 		return reimburseUsed;
 	}
 
-	public void setReimburseUsed(int reimburseUsed) {
+	public void setReimburseUsed(float reimburseUsed) {
 		this.reimburseUsed = reimburseUsed;
 	}
 	

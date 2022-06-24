@@ -2,6 +2,7 @@ package dev.cross.models;
 
 import dev.cross.types.Approve_Type;
 import dev.cross.types.Event_Type;
+import java.sql.Date;
 
 public class Request {
 	
@@ -9,21 +10,28 @@ public class Request {
 	private int employee_id;
 	private Event_Type event_t;
 	private String description;
-	private int money;
+	private float money;
 	private String grade;
 	private Approve_Type approval;
+	private Date startDate;
+	private Date endDate;
+	private float totalValue;
 	
 	public Request() {
 		super();
 	}
 	
-	public Request(int id, int employee_id, Event_Type event_t, String description, int money, String grade) {
+	public Request(int id, int employee_id, Event_Type event_t, String description, float money, String grade, Approve_Type approval, Date startDate, Date endDate, float totalValue) {
 		this.id = id;
 		this.employee_id = employee_id;
 		this.event_t = event_t;
 		this.description = description;
 		this.money = money;
 		this.grade = grade;
+		this.approval = approval;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.totalValue = totalValue;
 	}
 
 	public int getId() {
@@ -58,11 +66,11 @@ public class Request {
 		this.description = description;
 	}
 
-	public int getMoney() {
+	public float getMoney() {
 		return money;
 	}
 
-	public void setMoney(int money) {
+	public void setMoney(float money) {
 		this.money = money;
 	}
 
@@ -81,6 +89,32 @@ public class Request {
 	public void setApproval(Approve_Type approval) {
 		this.approval = approval;
 	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public float getTotalValue() {
+		return totalValue;
+	}
+
+	public void setTotalValue(float totalValue) {
+		this.totalValue = totalValue;
+	}
+	
+	
 	
 	
 }

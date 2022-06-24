@@ -20,7 +20,7 @@ public class UserDAO {
 			ps.setString(3, u.getUsername());
 			ps.setString(4, u.getPass());
 			ps.setBoolean(5, u.isManager());
-			ps.setInt(6, u.getReimburseUsed());
+			ps.setFloat(6, u.getReimburseUsed());
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				u.setId(rs.getInt("id"));

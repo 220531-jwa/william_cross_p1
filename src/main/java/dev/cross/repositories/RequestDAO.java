@@ -1,0 +1,113 @@
+package dev.cross.repositories;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import dev.cross.models.Request;
+import dev.cross.types.Approve_Type;
+import dev.cross.types.Event_Type;
+import dev.cross.utils.ConnectionUtil;
+
+public class RequestDAO {
+	private static ConnectionUtil cu = ConnectionUtil.getConnectionUtil();
+	
+	public Request createRequest(Request r) {
+		String sql = "insert into requestSystem.requests values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning *";
+		try (Connection conn = cu.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, r.getEmployee_id());
+			ps.setString(2, r.getEvent_t().toString());
+			ps.setString(3, r.getDescription());
+			ps.setFloat(4, r.getMoney());
+			ps.setString(5, r.getGrade());
+			ps.setString(6, r.getApproval().toString());
+			ps.setDate(7, r.getStartDate());
+			ps.setDate(8, r.getEndDate());
+			ps.setFloat(9, r.getTotalValue());
+			
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				r.setId(rs.getInt("id"));
+			} else {
+				r = null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
+	//TODO
+	public Request getRequest(int id) {
+		String sql = "select * from requestSystem.requests where request_id = ?";
+		Request r = null;
+		try (Connection conn = cu.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,  id);;
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				String e = rs.getString("event_t");
+				Event_Type eT = null;
+				switch(e) {
+				case "University_Course": 
+					eT = Event_Type.University_Course;
+					break;
+				case "Seminar": 
+					eT = Event_Type.Seminar;
+					break;
+				case "Certification": 
+					eT = Event_Type.Certification;
+					break;
+				case "Certification_Preparation_Class": 
+					eT = Event_Type.Certification_Preparation_Class;
+					break;
+				case "Tehnical_Training": 
+					eT = Event_Type.Tehnical_Training;
+					break;
+				case "Other": 
+					eT = Event_Type.Other;
+					break;
+					
+				}
+				
+				String a = rs.getString("approval");
+				Approve_Type aT = null;
+				switch(a) {
+				case "Accepted":
+					aT = Approve_Type.Accepted;
+					break;
+				case "Pending":
+					aT = Approve_Type.Pending;
+					break;
+				case "Rejected":
+					aT = Approve_Type.Rejected;
+					break;
+				}
+				
+				r = new Request(rs.getInt("request_id"), rs.getInt("employee"), eT, rs.getString("description"), rs.getFloat("emburse_request"), rs.getString("grade"), aT, rs.getDate("start_date"), rs.getDate("end_date"), rs.getFloat("total_value"));
+			} else {
+				r = null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
+	//TODO
+	public List<Request> getRequestList(int employeeId) {
+		
+		return null;
+	}
+	
+	//TODO
+	public boolean modifyRequest(int id) {
+		
+		return false;
+	}
+	
+}
