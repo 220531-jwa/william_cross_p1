@@ -4,6 +4,9 @@ package dev.cross;
 import io.javalin.Javalin;
 import static io.javalin.apibuilder.ApiBuilder.*;
 
+import dev.cross.controllers.RequestController;
+import dev.cross.controllers.UserController;
+
 
 public class Main {
 
@@ -15,21 +18,21 @@ public class Main {
 		
 		app.routes(() -> {
 			path("/users", () ->{
-				//post(UserController::createUser);
-				path("/{id}", () ->{
-					//get(UserController::getUser);
+				post(UserController::createUser);
+				path("/{username}", () ->{
+					get(UserController::getUser);
 				});
 			});
 			
 			path("/requests", () ->{
-				//get(RequestController::getRequestList);
-				//post(RequestController::createRequest);
+				get(RequestController::getRequestList);
+				post(RequestController::createRequest);
 				path("/{userId}", () ->{
-					//get(RequestController::getUserRequestList);
+					get(RequestController::getUserRequestList);
 				});
 				path("/{requestId}", () ->{
-					//get(RequestController::getRequest);
-					//put(RequestController::modifyRequest);
+					get(RequestController::getRequest);
+					put(RequestController::modifyRequest);
 				});
 			});
 		});
