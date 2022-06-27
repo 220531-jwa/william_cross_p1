@@ -8,14 +8,14 @@ import dev.cross.controllers.RequestController;
 import dev.cross.controllers.UserController;
 
 
-public class Main {
+public class ERSRunner {
 
 	public static void main(String[] args) {
 		
 		Javalin app = Javalin.create();
 		
 		app.start(8080);
-		
+
 		app.routes(() -> {
 			path("/users", () ->{
 				post(UserController::createUser);

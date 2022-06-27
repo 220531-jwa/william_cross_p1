@@ -44,7 +44,7 @@ public class UserDAO {
 			
 			if (rs.next()) {
 				return new User(
-						rs.getInt("id"),
+						rs.getInt("employee_id"),
 						rs.getString("first_name"),
 						rs.getString("last_name"),
 						rs.getString("username"),
