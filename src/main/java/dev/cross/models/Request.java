@@ -10,18 +10,19 @@ public class Request {
 	private int employee_id;
 	private Event_Type event_t;
 	private String description;
-	private float money;
 	private String grade;
 	private Approve_Type approval;
 	private Date startDate;
 	private Date endDate;
-	private float totalValue;
+	private int totalValue;
+	private int money;
+
 	
 	public Request() {
 		super();
 	}
 	
-	public Request(int id, int employee_id, Event_Type event_t, String description, float money, String grade, Approve_Type approval, Date startDate, Date endDate, float totalValue) {
+	public Request(int id, int employee_id, Event_Type event_t, String description, String grade, Approve_Type approval, Date startDate, Date endDate, int totalValue, int money) {
 		this.id = id;
 		this.employee_id = employee_id;
 		this.event_t = event_t;
@@ -66,11 +67,11 @@ public class Request {
 		this.description = description;
 	}
 
-	public float getMoney() {
+	public int getMoney() {
 		return money;
 	}
 
-	public void setMoney(float money) {
+	public void setMoney(int money) {
 		this.money = money;
 	}
 
@@ -106,11 +107,11 @@ public class Request {
 		this.endDate = endDate;
 	}
 
-	public float getTotalValue() {
+	public int getTotalValue() {
 		return totalValue;
 	}
 
-	public void setTotalValue(float totalValue) {
+	public void setTotalValue(int totalValue) {
 		this.totalValue = totalValue;
 	}
 	

@@ -33,7 +33,7 @@ public class ERSRunner {
 			path("/requests", () ->{
 				get(RequestController::getRequestList);
 				post(RequestController::createRequest);
-				path("/{userId}", () ->{
+				path("/user/{userId}", () ->{
 					get(RequestController::getUserRequestList);
 				});
 				path("/{requestId}", () ->{

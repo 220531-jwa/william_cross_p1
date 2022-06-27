@@ -22,12 +22,12 @@ public class RequestDAO {
 			ps.setInt(1, r.getEmployee_id());
 			ps.setString(2, r.getEvent_t().toString());
 			ps.setString(3, r.getDescription());
-			ps.setFloat(4, r.getMoney());
-			ps.setString(5, r.getGrade());
-			ps.setString(6, r.getApproval().toString());
-			ps.setDate(7, r.getStartDate());
-			ps.setDate(8, r.getEndDate());
-			ps.setFloat(9, r.getTotalValue());
+			ps.setString(4, r.getGrade());
+			ps.setString(5, r.getApproval().toString());
+			ps.setDate(6, r.getStartDate());
+			ps.setDate(7, r.getEndDate());
+			ps.setInt(8, r.getTotalValue());
+			ps.setInt(9, r.getMoney());
 			
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -87,7 +87,7 @@ public class RequestDAO {
 					break;
 				}
 				
-				r = new Request(rs.getInt("request_id"), rs.getInt("employee"), eT, rs.getString("description"), rs.getFloat("emburse_request"), rs.getString("grade"), aT, rs.getDate("start_date"), rs.getDate("end_date"), rs.getFloat("total_value"));
+				r = new Request(rs.getInt("request_id"), rs.getInt("employee"), eT, rs.getString("description"), rs.getString("grade"), aT, rs.getDate("start_date"), rs.getDate("end_date"), rs.getInt("total_value"), rs.getInt("reimburse_amount"));
 			} else {
 				r = null;
 			}
@@ -144,7 +144,7 @@ public class RequestDAO {
 					break;
 				}
 				
-				r.add(new Request(rs.getInt("request_id"), rs.getInt("employee"), eT, rs.getString("description"), rs.getFloat("emburse_request"), rs.getString("grade"), aT, rs.getDate("start_date"), rs.getDate("end_date"), rs.getFloat("total_value")));
+				r.add(new Request(rs.getInt("request_id"), rs.getInt("employee"), eT, rs.getString("description"), rs.getString("grade"), aT, rs.getDate("start_date"), rs.getDate("end_date"), rs.getInt("total_value"), rs.getInt("reimburse_amount")));
 			}
 			
 		} catch (SQLException e) {
@@ -198,7 +198,7 @@ public class RequestDAO {
 					break;
 				}
 				
-				r.add(new Request(rs.getInt("request_id"), rs.getInt("employee"), eT, rs.getString("description"), rs.getFloat("emburse_request"), rs.getString("grade"), aT, rs.getDate("start_date"), rs.getDate("end_date"), rs.getFloat("total_value")));
+				r.add(new Request(rs.getInt("request_id"), rs.getInt("employee"), eT, rs.getString("description"), rs.getString("grade"), aT, rs.getDate("start_date"), rs.getDate("end_date"), rs.getInt("total_value"), rs.getInt("reimburse_amount")));
 			}
 			
 		} catch (SQLException e) {
@@ -208,10 +208,10 @@ public class RequestDAO {
 	}
 	
 	public boolean modifyRequest(Request update) {
-		String sql = "update requestSystem.requests set (emburse_request, approval, grade)" + "= (?, ?, ?) where id = ?";
+		String sql = "update requestSystem.requests set (reimburse_amount, approval, grade)" + "= (?, ?, ?) where id = ?";
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setFloat(1, update.getMoney());
+			ps.setInt(1, update.getMoney());
 			ps.setString(2, update.getApproval().toString());
 			ps.setString(3, update.getGrade());
 			if (ps.executeUpdate() == 0) {
