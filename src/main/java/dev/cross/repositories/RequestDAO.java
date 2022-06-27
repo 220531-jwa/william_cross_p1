@@ -97,7 +97,7 @@ public class RequestDAO {
 		return r;
 	}
 	
-	//TODO
+	
 	public List<Request> getRequestListByEmployee(int employeeId) {
 		String sql = "select * from requestSystem.requests where employee = ?";
 		ArrayList<Request> r = new ArrayList<>();
@@ -207,7 +207,6 @@ public class RequestDAO {
 		return r;
 	}
 	
-	//TODO
 	public boolean modifyRequest(Request update) {
 		String sql = "update requestSystem.requests set (emburse_request, approval, grade)" + "= (?, ?, ?) where id = ?";
 		try (Connection conn = cu.getConnection()) {

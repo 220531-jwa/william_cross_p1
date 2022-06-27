@@ -4,6 +4,7 @@ package dev.cross;
 import io.javalin.Javalin;
 import static io.javalin.apibuilder.ApiBuilder.*;
 
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -12,7 +13,26 @@ public class Main {
 		
 		app.start(8080);
 		
-		
+		app.routes(() -> {
+			path("/users", () ->{
+				//post(UserController::createUser);
+				path("/{id}", () ->{
+					//get(UserController::getUser);
+				});
+			});
+			
+			path("/requests", () ->{
+				//get(RequestController::getRequestList);
+				//post(RequestController::createRequest);
+				path("/{userId}", () ->{
+					//get(RequestController::getUserRequestList);
+				});
+				path("/{requestId}", () ->{
+					//get(RequestController::getRequest);
+					//put(RequestController::modifyRequest);
+				});
+			});
+		});
 		
 		app.exception(Exception.class, (e, ctx) -> {
 			ctx.status(404);
