@@ -2,6 +2,8 @@
 package dev.cross;
 
 import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
+
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 import dev.cross.controllers.RequestController;
@@ -12,7 +14,11 @@ public class ERSRunner {
 
 	public static void main(String[] args) {
 		
-		Javalin app = Javalin.create();
+		Javalin app = Javalin.create(config -> {
+			config.enableCorsForAllOrigins();
+//			config.enableCorsForOrigin("http://localhost:8080");
+			config.addStaticFiles("/", Location.CLASSPATH);
+		});
 		
 		app.start(8080);
 

@@ -21,12 +21,16 @@ async function login() {
         // .then() takes a function as an argument
         .then((resp) => {
             
-            
-
             console.log(resp); // this is where we will eventually put our DOM manipulation if needed
-            
-            
-            //window.location.assign("homePage.html");
+
+
+            if (resp.pass == pass) {
+                sessionStorage.setItem("id", resp.id);
+                window.location.assign("homePage.html");
+            } else {
+                console.log("Wrong Password");
+                wrongPass();
+            }
 
         })
         // .catch will execute if there's any error
@@ -36,4 +40,13 @@ async function login() {
 
 
     
+}
+
+function wrongPass() {
+    let slot = document.getElementById("error");
+    let text = document.createElement("p");
+    let tempText = "INCORRECT LOG-IN INFORMATION";
+    text.innerHTML = tempText;
+    slot.innerHTML = "";
+    slot.appendChild(text);
 }
