@@ -25,7 +25,7 @@ async function login() {
 
 
             if (resp.pass == pass) {
-                sessionStorage.setItem("id", resp.id);
+                sessionStorage.setItem("user", JSON.stringify(resp));
                 window.location.assign("homePage.html");
             } else {
                 console.log("Wrong Password");
@@ -66,7 +66,7 @@ async function managerLogin() {
                 console.log("Not a manager");
                 lackPerm();
             } else if (resp.pass == pass) {
-                sessionStorage.setItem("id", resp.id);
+                sessionStorage.setItem("user", resp);
                 window.location.assign("managerHomePage.html");
             } else {
                 console.log("Wrong Password");
