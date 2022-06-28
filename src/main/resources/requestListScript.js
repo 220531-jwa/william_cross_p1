@@ -33,8 +33,20 @@ async function loadTable() {
 
                 for( let i = 0; i < resp.length; i ++) {
                     let row = table.insertRow();
+
+
+                    let buttonText = resp[i].description;
+                    let button = document.createElement('button');
+                    button.type = 'button';
+                    button.innerHTML = buttonText;
+
+                    button.onclick = function() {
+                        sessionStorage.setItem("request", resp[i].id);
+                        window.location.assign("requestView.html");
+                    }
+
                     let desc = row.insertCell();
-                    desc.appendChild(document.createTextNode(resp[i].description));
+                    desc.appendChild(button);
                     let type = row.insertCell();
                     type.appendChild(document.createTextNode(resp[i].event_t));
                     let amount = row.insertCell();
