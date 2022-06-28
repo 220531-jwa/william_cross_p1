@@ -19,7 +19,7 @@
         <br>
         <br>
         <label for="Event_Type"><b>Event Category</b></label>
-        <select name="Event_Type" required>
+        <select name="Event_Type" id="Event_Type" required>
             <option value="University_Course">University Course</option>
             <option value="Seminar">Seminar</option>
             <option value="Certification_Preparation_Class">Certification Preparation Class</option>
@@ -30,21 +30,25 @@
         <br>
         <br>
         <label for="total_value"><b>What is the total cost of the event?</b></label>
-        <input type="number" placeholder="Description" name="description" required>
+        <input type="number" name="total_value" id="total_value" required>
         </div><button type="button" class="btn btn-primary"  onclick="calculate()">Calculate Reimburse Amount</button><div id="calculated"></div>
         <br>
         <br>
         <label for="start"><b>When does your event start?</b></label>
-        <input type="date" name="start" required>
+        <input type="date" name="start" id="start" required>
         <br>
         <br>
         <label for="end"><b>When does your event end?</b></label>
-        <input type="date" name="end" required>
+        <input type="date" name="end" id="end" required>
         <br>
         <br>
         <button type="button" class="btn btn-primary"  onclick="submit()">Submit Request</button>
+        <br>
+        <button type="button" class="btn btn-primary"  onclick="cancel()">Cancel Request</button>
 
     </div>
+
+    <script src="./requestCreationScript.js"></script>
 
     <!-- Bootstrap -->
     <!-- JavaScript Bundle with Popper -->

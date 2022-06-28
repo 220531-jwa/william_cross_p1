@@ -13,7 +13,6 @@ private static EventService eventService = new EventService(new EventDAO());
 		String event = ctx.pathParam("eventId");
 		
 		Event_Type e = Event_Type.Other;
-		System.out.println(e);
 		
 		switch(event) {
 		case "University_Course": 
@@ -37,7 +36,6 @@ private static EventService eventService = new EventService(new EventDAO());
 		
 		String s = eventService.getEvent(e);
 		
-		System.out.println(e);
 		
 		if (s != null) {
 			ctx.status(200);
