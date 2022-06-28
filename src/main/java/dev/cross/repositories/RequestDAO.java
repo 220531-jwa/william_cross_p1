@@ -16,7 +16,7 @@ public class RequestDAO {
 	private static ConnectionUtil cu = ConnectionUtil.getConnectionUtil();
 	
 	public Request createRequest(Request r) {
-		String sql = "insert into requestSystem.requests values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning *";
+		String sql = "insert into requestSystem.requests values (default, ?, ?::event_type, ?, ?, ?::approve_type, ?, ?, ?, ?) returning *";
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, r.getEmployee_id());
@@ -31,7 +31,7 @@ public class RequestDAO {
 			
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				r.setId(rs.getInt("id"));
+				r.setId(rs.getInt("request_id"));
 			} else {
 				r = null;
 			}
@@ -208,7 +208,7 @@ public class RequestDAO {
 	}
 	
 	public boolean modifyRequest(Request update) {
-		String sql = "update requestSystem.requests set (reimburse_amount, approval, grade)" + "= (?, ?, ?) where id = ?";
+		String sql = "update requestSystem.requests set (reimburse_amount, approval, grade)" + "= (?, ?::aprove_type, ?) where id = ?";
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, update.getMoney());

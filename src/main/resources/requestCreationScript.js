@@ -2,6 +2,35 @@ let baseUrl = "http://localhost:8080"; // /users, /users/1
 
 
 async function submit() {
+    let user = JSON.parse(sessionStorage.getItem("user"));
+
+    console.log(user);
+
+    let request = {
+        id: 1,
+        employee_id: user.id,
+        event_t: document.getElementById('Event_Type').value, 
+        description: document.getElementById('description').value,
+        grade: "Unknown", 
+        approval: "Pending", 
+        startDate: document.getElementById('start').value,
+        endDate: document.getElementById('end').value,
+        totalValue: document.getElementById('total_value').value,
+        money: 0
+    }
+
+
+    const response = await fetch(`${baseUrl}/requests`, {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(request) // body data type must match "Content-Type" header
+      });
+
+
+
     window.location.assign("homePage.html");
 }
 
