@@ -6,6 +6,7 @@ import io.javalin.http.staticfiles.Location;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
+import dev.cross.controllers.EventController;
 import dev.cross.controllers.RequestController;
 import dev.cross.controllers.UserController;
 
@@ -40,6 +41,10 @@ public class ERSRunner {
 					get(RequestController::getRequest);
 					put(RequestController::modifyRequest);
 				});
+			});
+			
+			path("/events/{eventId}", () ->{
+				get(EventController::getEvent);
 			});
 		});
 		

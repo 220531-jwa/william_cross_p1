@@ -13,7 +13,7 @@ public class EventDAO {
 	private static ConnectionUtil cu = ConnectionUtil.getConnectionUtil();
 	
 	public Grade_Type getGradeType(Event_Type ev) {
-		String sql = "select grade_t from requestsystem.eventtypes where event_t = ?";
+		String sql = "select * from requestsystem.eventtypes where event_t = ?::event_type";
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, ev.toString());
@@ -35,7 +35,7 @@ public class EventDAO {
 	}
 	
 	public double getPct(Event_Type ev) {
-		String sql = "select reimburse_pct from requestsystem.eventtypes where event_t = ?";
+		String sql = "select reimburse_pct from requestsystem.eventtypes where event_t = ?::event_type";
 		double pct = 0.0;
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
