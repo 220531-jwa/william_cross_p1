@@ -30,6 +30,16 @@ public class RequestService {
 	}
 	
 	public Request createRequest(Request newRequest) {
+		double newMoney = newRequest.getTotalValue();
+		
+		double pct = eventDao.getPct(newRequest.getEvent_t());
+		
+		newMoney *= pct;
+		newMoney = Math.floor(newMoney);
+		newMoney /= 100;
+		
+		newRequest.setMoney(newMoney);
+		
 		return requestDao.createRequest(newRequest);
 	}
 	
