@@ -14,7 +14,7 @@ async function login() {
     // send a GET request to our backend using the Fetch API
     // fetch method returns a Promise
     let res = await fetch(
-                        `${baseUrl}/users/${uname}/${pass}`, {
+                        `${baseUrl}/users/login/${uname}/${pass}`, {
                             method: 'GET', 
                             body: JSON.stringify(login)
                         }
@@ -58,7 +58,7 @@ async function managerLogin() {
     // send a GET request to our backend using the Fetch API
     // fetch method returns a Promise
     let res = await fetch(
-        `${baseUrl}/users/${uname}/${pass}`, {
+        `${baseUrl}/users/login/${uname}/${pass}`, {
             method: 'GET', 
         }
                     );

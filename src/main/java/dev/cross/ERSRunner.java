@@ -26,11 +26,17 @@ public class ERSRunner {
 		app.routes(() -> {
 			path("/users", () ->{
 				post(UserController::createUser);
-				path("/{uname}", () ->{
+				path("/byID/{id}", () ->{
+					get(UserController::getUserId);
+				});
+				
+				path("/login/{uname}", () ->{
 					path("/{pass}", () ->{
 						get(UserController::getUser);
 					});
 				});
+				
+				
 				
 			});
 			

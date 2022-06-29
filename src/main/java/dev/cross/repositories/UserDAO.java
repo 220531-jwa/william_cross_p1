@@ -60,4 +60,31 @@ public class UserDAO {
 		return null;
 	}
 	
+	public User getUserById(int id) {
+		String sql = "select * from requestsystem.users where employee_id = ?";
+		
+		try (Connection conn = cu.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				return new User(
+						rs.getInt("employee_id"),
+						rs.getString("first_name"),
+						rs.getString("last_name"),
+						rs.getString("username"),
+						rs.getString("pass"),
+						rs.getBoolean("manager"),
+						rs.getInt("reimburse_used")
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

@@ -22,4 +22,8 @@ public class UserService {
 	public User createUser(User u) {
 		return userDao.createUser(u);
 	}
+	
+	public User getUserId(int id) {
+		return userDao.getUserById(id);
+	}
 }
