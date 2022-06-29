@@ -24,6 +24,7 @@ async function loadTable() {
                 console.log(resp); // this is where we will eventually put our DOM manipulation if needed
 
                 var request = document.createElement('table');
+
                 let description = request.insertRow();
                 let desc = description.insertCell();
                 desc.appendChild(document.createTextNode("Description"));
@@ -71,6 +72,16 @@ async function loadTable() {
                 desc.appendChild(document.createTextNode("Grade"));
                 val = grade.insertCell();
                 val.appendChild(document.createTextNode(resp.grade));
+                let buttonSpace = grade.insertCell();
+                let buttonText = "EDIT";
+                let button = document.createElement('button');
+                button.type = 'button';
+                button.innerHTML = buttonText;
+                button.onclick = function() {
+                    let newG = prompt("What Grade Did You Recieve?");
+                    updateGrade(resp, newG);
+                }
+                buttonSpace.appendChild(button);
 
 
                 document.getElementById("request").appendChild(request);
@@ -81,4 +92,36 @@ async function loadTable() {
             .catch((error) => {
                 console.log(error);
             });
-    }
+}
+
+async function updateMoney(request, newMoney) {
+    request.money = newMoney;
+
+    let res = await fetch(
+        `${baseUrl}/requests/${request.id}`, {
+            method: 'PUT', 
+            headers: {
+              'Content-Type': 'application/json'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(request) // body data type must match "Content-Type" header
+          });
+
+    window.location.assign("requestView.html");
+}
+
+async function updateGrade(request, newGrade) {
+    request.grade = newGrade;
+
+    let res = await fetch(
+        `${baseUrl}/requests/${request.id}`, {
+            method: 'PUT', 
+            headers: {
+              'Content-Type': 'application/json'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(request) // body data type must match "Content-Type" header
+          });
+
+    window.location.assign("requestView.html");
+}

@@ -26,8 +26,8 @@ public class RequestDAO {
 			ps.setString(5, r.getApproval().toString());
 			ps.setDate(6, r.getStartDate());
 			ps.setDate(7, r.getEndDate());
-			ps.setInt(8, r.getTotalValue());
-			ps.setInt(9, r.getMoney());
+			ps.setDouble(8, r.getTotalValue());
+			ps.setDouble(9, r.getMoney());
 			
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -208,12 +208,13 @@ public class RequestDAO {
 	}
 	
 	public boolean modifyRequest(Request update) {
-		String sql = "update requestSystem.requests set (reimburse_amount, approval, grade)" + "= (?, ?::aprove_type, ?) where id = ?";
+		String sql = "update requestSystem.requests set (reimburse_amount, approval, grade)" + "= (?, ?::approve_type, ?) where request_id = ?";
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, update.getMoney());
+			ps.setDouble(1, update.getMoney());
 			ps.setString(2, update.getApproval().toString());
 			ps.setString(3, update.getGrade());
+			ps.setInt(4, update.getId());
 			if (ps.executeUpdate() == 0) {
 				return false;
 			} else {

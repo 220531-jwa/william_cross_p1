@@ -14,8 +14,8 @@ public class Request {
 	private Approve_Type approval;
 	private Date startDate;
 	private Date endDate;
-	private int totalValue;
-	private int money;
+	private double totalValue;
+	private double money;
 
 	
 	public Request() {
@@ -67,11 +67,11 @@ public class Request {
 		this.description = description;
 	}
 
-	public int getMoney() {
+	public double getMoney() {
 		return money;
 	}
 
-	public void setMoney(int money) {
+	public void setMoney(double money) {
 		this.money = money;
 	}
 
@@ -107,11 +107,11 @@ public class Request {
 		this.endDate = endDate;
 	}
 
-	public int getTotalValue() {
+	public double getTotalValue() {
 		return totalValue;
 	}
 
-	public void setTotalValue(int totalValue) {
+	public void setTotalValue(double totalValue) {
 		this.totalValue = totalValue;
 	}
 	
