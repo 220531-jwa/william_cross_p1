@@ -1,5 +1,6 @@
 package dev.cross.controllers;
 
+import dev.cross.models.Creds;
 import dev.cross.models.User;
 import dev.cross.repositories.UserDAO;
 import dev.cross.services.UserService;
@@ -21,8 +22,8 @@ public class UserController {
 	}
 	
 	public static void getUser(Context ctx) {
-		String username = ctx.pathParam("username");
-		User u = userService.getUser(username);
+		Creds credentials = ctx.bodyAsClass(Creds.class);
+		User u = userService.getUser(credentials);
 		if (u != null) {
 			ctx.status(200);
 			ctx.json(u);

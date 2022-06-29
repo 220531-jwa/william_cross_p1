@@ -26,9 +26,7 @@ public class ERSRunner {
 		app.routes(() -> {
 			path("/users", () ->{
 				post(UserController::createUser);
-				path("/{username}", () ->{
-					get(UserController::getUser);
-				});
+				get(UserController::getUser);
 			});
 			
 			path("/requests", () ->{
@@ -46,6 +44,8 @@ public class ERSRunner {
 			path("/events/{eventId}", () ->{
 				get(EventController::getEvent);
 			});
+			
+			
 		});
 		
 		app.exception(Exception.class, (e, ctx) -> {
