@@ -65,4 +65,22 @@ public class RequestController {
 			ctx.status(404);
 		}
 	}
+	
+	public static void approveRequest(Context ctx) {
+		int id = Integer.parseInt(ctx.pathParam("request"));
+		if (requestService.approveRequest(id)) {
+			ctx.status(200);
+		} else {
+			ctx.status(400);
+		}
+	}
+	
+	public static void rejectRequest(Context ctx) {
+		int id = Integer.parseInt(ctx.pathParam("request"));
+		if (requestService.rejectRequest(id)) {
+			ctx.status(200);
+		} else {
+			ctx.status(400);
+		}
+	}
 }

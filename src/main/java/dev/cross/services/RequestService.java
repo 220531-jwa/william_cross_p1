@@ -5,6 +5,7 @@ import java.util.List;
 import dev.cross.models.Request;
 import dev.cross.repositories.EventDAO;
 import dev.cross.repositories.RequestDAO;
+import dev.cross.types.Approve_Type;
 
 public class RequestService {
 
@@ -34,6 +35,18 @@ public class RequestService {
 	
 	public boolean modifyRequest(Request newRequest) {
 		return requestDao.modifyRequest(newRequest);
+	}
+	
+	public boolean approveRequest(int id) {
+		Request r = requestDao.getRequest(id);
+		r.setApproval(Approve_Type.Accepted);
+		return requestDao.modifyRequest(r);
+	}
+	
+	public boolean rejectRequest(int id) {
+		Request r = requestDao.getRequest(id);
+		r.setApproval(Approve_Type.Rejected);
+		return requestDao.modifyRequest(r);
 	}
 	
 }
