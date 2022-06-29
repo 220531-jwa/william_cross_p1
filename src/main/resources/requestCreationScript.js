@@ -1,5 +1,10 @@
 let baseUrl = "http://localhost:8080"; // /users, /users/1
 
+let user = JSON.parse(sessionStorage.getItem("user"));
+if (user == null){
+    alert("Not logged in. Returning to Login Page");
+    window.location.assign("login.html");
+} 
 
 async function submit() {
     let user = JSON.parse(sessionStorage.getItem("user"));

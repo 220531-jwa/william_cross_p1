@@ -1,12 +1,16 @@
 let baseUrl = "http://localhost:8080"; // /users, /users/1
 
-//function hello() {
-    let user = JSON.parse(sessionStorage.getItem("user"));
-    console.log(user);
-    let nameText = user.firstName + " " + user.lastName;
-    console.log(nameText);
-    document.getElementById("Hello").innerHTML = "Hello " + nameText + "!"; 
-//}
+
+let user = JSON.parse(sessionStorage.getItem("user"));
+if (user == null){
+    alert("Not logged in. Returning to Login Page");
+    window.location.assign("login.html");
+} 
+console.log(user);
+let nameText = user.firstName + " " + user.lastName;
+console.log(nameText);
+document.getElementById("Hello").innerHTML = "Hello " + nameText + "!"; 
+
 
 
 async function viewRequests() {
