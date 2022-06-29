@@ -26,7 +26,12 @@ public class ERSRunner {
 		app.routes(() -> {
 			path("/users", () ->{
 				post(UserController::createUser);
-				get(UserController::getUser);
+				path("/{uname}", () ->{
+					path("/{pass}", () ->{
+						get(UserController::getUser);
+					});
+				});
+				
 			});
 			
 			path("/requests", () ->{
@@ -45,6 +50,13 @@ public class ERSRunner {
 				get(EventController::getEvent);
 			});
 			
+			path("/{request}/approve", () ->{
+				//put(RequestController::approveRequest);
+			});
+			
+			path("/{request}/reject", () ->{
+				//put(RequestController::rejectRequest);
+			});
 			
 		});
 		

@@ -22,13 +22,16 @@ public class UserController {
 	}
 	
 	public static void getUser(Context ctx) {
-		Creds credentials = ctx.bodyAsClass(Creds.class);
+		
+		String username = ctx.pathParam("uname");
+		String pass = ctx.pathParam("pass");
+		Creds credentials = new Creds(username, pass);
 		User u = userService.getUser(credentials);
 		if (u != null) {
 			ctx.status(200);
 			ctx.json(u);
 		} else {
-			ctx.status(404);
+			ctx.status(400);
 		}
 	}
 	
