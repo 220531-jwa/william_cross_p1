@@ -75,7 +75,7 @@ async function managerLogin() {
                     lackPerm();
                 } else {
                     sessionStorage.setItem("user", JSON.stringify(resp));
-                    window.location.assign("homePage.html");
+                    window.location.assign("managerHomePage.html");
                 }
                 
     
