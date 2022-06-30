@@ -24,6 +24,7 @@ async function loadTable() {
                 console.log(resp); // this is where we will eventually put our DOM manipulation if needed
 
                 var request = document.createElement('table');
+                request.classList.add('table-bordered');
 
                 let description = request.insertRow();
                 let desc = description.insertCell();

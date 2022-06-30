@@ -31,6 +31,7 @@ async function loadRequest() {
                 }
 
                 var request = document.createElement('table');
+                request.classList.add('table-bordered');
 
                 let description = request.insertRow();
                 let desc = description.insertCell();
