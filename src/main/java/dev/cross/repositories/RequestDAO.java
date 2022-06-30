@@ -155,7 +155,7 @@ public class RequestDAO {
 	}
 		
 	public List<RequestManagerView> getRequestList() {
-		String sql = "select * from requestsystem.requests, requestsystem.users where employee = employee_id;";
+		String sql = "select * from requestsystem.requests, requestsystem.users where employee = employee_id and approval = 'Pending' order by request_id;";
 		ArrayList<RequestManagerView> r = new ArrayList<>();
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
