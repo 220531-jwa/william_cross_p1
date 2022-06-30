@@ -47,8 +47,19 @@ public class RequestService {
 		newMoney = Math.floor(newMoney);
 		newMoney /= 100;
 		
-		newRequest.setMoney(newMoney);
+		newRequest.setExpected_funds(newMoney);
 		
+		User u = userDao.getUserById(newRequest.getEmployee_id());
+		
+		if (newMoney + u.getReimburseUsed() > 1000) {
+			newMoney = 1000 - u.getReimburseUsed();
+			
+		}
+		
+		u.setReimburseUsed((float)(u.getReimburseUsed() + newRequest.getMoney()));
+		userDao.modifyUserNotif(u);
+		
+		newRequest.setMoney(newMoney);
 		return requestDao.createRequest(newRequest);
 	}
 	

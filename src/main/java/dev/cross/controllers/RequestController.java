@@ -6,12 +6,13 @@ import dev.cross.models.Request;
 import dev.cross.models.RequestManagerView;
 import dev.cross.repositories.EventDAO;
 import dev.cross.repositories.RequestDAO;
+import dev.cross.repositories.UserDAO;
 import dev.cross.services.RequestService;
 import io.javalin.http.Context;
 
 public class RequestController {
 
-	private static RequestService requestService = new RequestService( new RequestDAO(), new EventDAO() );
+	private static RequestService requestService = new RequestService( new RequestDAO(), new EventDAO(), new UserDAO() );
 	
 	public static void getRequestList(Context ctx) {
 		List<RequestManagerView> requests = requestService.getAllRequests();
@@ -28,8 +29,13 @@ public class RequestController {
 		Request request = ctx.bodyAsClass(Request.class);
 		Request r = requestService.createRequest(request);
 		if (r != null) {
-			ctx.status(200);
 			ctx.json(r);
+			if (r.getMoney() != r.getExpected_funds()) {
+				ctx.status(202);
+			} else {
+				ctx.status(200);
+			}
+			
 		} else {
 			ctx.status(404);
 		}

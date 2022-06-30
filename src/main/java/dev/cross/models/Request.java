@@ -4,6 +4,9 @@ import dev.cross.types.Approve_Type;
 import dev.cross.types.Event_Type;
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
 	
 	private int id;

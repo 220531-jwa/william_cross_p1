@@ -57,7 +57,7 @@ async function loadRequest() {
                 val.appendChild(document.createTextNode(resp.money));
                 if (resp.money < resp.expected_funds) { 
                     desc = money.insertCell();
-                    desc.appendChild(document.createTextNode("They are owed " + resp.expected_funds + ", but are only slated to recieve " + money));
+                    desc.appendChild(document.createTextNode("They are owed " + resp.expected_funds + ", but are only slated to recieve " + resp.money));
                 }
                 let buttonSpace = money.insertCell();
                 let buttonText = "EDIT";
@@ -66,7 +66,7 @@ async function loadRequest() {
                 button.innerHTML = buttonText;
                 button.onclick = function() {
                     let newM = prompt("How much should they be paid?");
-                    updateMoney(resp);
+                    updateMoney(resp,newM);
                 }
                 buttonSpace.appendChild(button);
 
@@ -126,7 +126,7 @@ async function updateMoney(request, newMoney) {
             body: JSON.stringify(request) // body data type must match "Content-Type" header
           });
 
-    window.location.assign("requestView.html");
+    window.location.assign("requestViewManager.html");
 }
 
 async function approve(request) {

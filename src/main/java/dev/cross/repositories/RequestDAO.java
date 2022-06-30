@@ -82,7 +82,7 @@ public class RequestDAO {
 				String a = rs.getString("approval");
 				Approve_Type aT = null;
 				switch(a) {
-				case "Accepted":
+				case "Approved":
 					aT = Approve_Type.Approved;
 					break;
 				case "Pending":
@@ -153,7 +153,7 @@ public class RequestDAO {
 				String a = rs.getString("approval");
 				Approve_Type aT = null;
 				switch(a) {
-				case "Accepted":
+				case "Approved":
 					aT = Approve_Type.Approved;
 					break;
 				case "Pending":
@@ -227,7 +227,7 @@ public class RequestDAO {
 				String a = rs.getString("approval");
 				Approve_Type aT = null;
 				switch(a) {
-				case "Accepted":
+				case "Approved":
 					aT = Approve_Type.Approved;
 					break;
 				case "Pending":
@@ -297,7 +297,7 @@ public class RequestDAO {
 				String a = rs.getString("approval");
 				Approve_Type aT = null;
 				switch(a) {
-				case "Accepted":
+				case "Approved":
 					aT = Approve_Type.Approved;
 					break;
 				case "Pending":

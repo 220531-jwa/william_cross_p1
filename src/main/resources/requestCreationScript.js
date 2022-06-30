@@ -34,6 +34,12 @@ async function submit() {
         body: JSON.stringify(request) // body data type must match "Content-Type" header
       });
 
+    console.log("STATUS: " + response.status);
+
+    if (response.status == 202) {
+        alert("Insufficient Remaining Reimbursement. Request submitted with maximum reimbursement.");
+    }
+
 
 
     window.location.assign("homePage.html");
