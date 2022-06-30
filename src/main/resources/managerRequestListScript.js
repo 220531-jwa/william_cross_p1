@@ -9,9 +9,6 @@ if (user == null || !user.manager){
 async function loadTable() {
     console.log("GO");
     
-    let uid = JSON.parse(sessionStorage.getItem("user")).id;
-
-    console.log(uid);
     
     let res = await fetch(
         `${baseUrl}/requests`
@@ -54,8 +51,10 @@ async function loadTable() {
 
                     let desc = row.insertCell();
                     desc.appendChild(button);
+
                     let emp = row.insertCell();
-                    emp.appendChild(document.createTextNode(resp[i].event_t));
+                    emp.appendChild(document.createTextNode(resp[i].firstName + " " + resp[i].lastName));
+                    
                     let type = row.insertCell();
                     type.appendChild(document.createTextNode(resp[i].event_t));
                     let amount = row.insertCell();

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.cross.models.Request;
+import dev.cross.models.RequestManagerView;
 import dev.cross.types.Approve_Type;
 import dev.cross.types.Event_Type;
 import dev.cross.utils.ConnectionUtil;
@@ -153,9 +154,9 @@ public class RequestDAO {
 		return r;
 	}
 		
-	public List<Request> getRequestList() {
-		String sql = "select * from requestSystem.requests";
-		ArrayList<Request> r = new ArrayList<>();
+	public List<RequestManagerView> getRequestList() {
+		String sql = "select * from requestsystem.requests, requestsystem.users where employee = employee_id;";
+		ArrayList<RequestManagerView> r = new ArrayList<>();
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -198,7 +199,7 @@ public class RequestDAO {
 					break;
 				}
 				
-				r.add(new Request(rs.getInt("request_id"), rs.getInt("employee"), eT, rs.getString("description"), rs.getString("grade"), aT, rs.getDate("start_date"), rs.getDate("end_date"), rs.getInt("total_value"), rs.getInt("reimburse_amount")));
+				r.add(new RequestManagerView(rs.getInt("request_id"), rs.getInt("employee"), eT, rs.getString("description"), rs.getString("grade"), aT, rs.getDate("start_date"), rs.getDate("end_date"), rs.getInt("total_value"), rs.getInt("reimburse_amount"), rs.getString("first_name"), rs.getString("last_name")));
 			}
 			
 		} catch (SQLException e) {

@@ -3,6 +3,7 @@ package dev.cross.services;
 import java.util.List;
 
 import dev.cross.models.Request;
+import dev.cross.models.RequestManagerView;
 import dev.cross.repositories.EventDAO;
 import dev.cross.repositories.RequestDAO;
 import dev.cross.types.Approve_Type;
@@ -21,7 +22,7 @@ public class RequestService {
 		return requestDao.getRequest(id);
 	}
 	
-	public List<Request> getAllRequests() {
+	public List<RequestManagerView> getAllRequests() {
 		return requestDao.getRequestList();
 	}
 	

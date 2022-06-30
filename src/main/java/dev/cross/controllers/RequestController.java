@@ -3,6 +3,7 @@ package dev.cross.controllers;
 import java.util.List;
 
 import dev.cross.models.Request;
+import dev.cross.models.RequestManagerView;
 import dev.cross.repositories.EventDAO;
 import dev.cross.repositories.RequestDAO;
 import dev.cross.services.RequestService;
@@ -13,7 +14,7 @@ public class RequestController {
 	private static RequestService requestService = new RequestService( new RequestDAO(), new EventDAO() );
 	
 	public static void getRequestList(Context ctx) {
-		List<Request> requests = requestService.getAllRequests();
+		List<RequestManagerView> requests = requestService.getAllRequests();
 		if (requests.isEmpty()) {
 			ctx.status(404);
 		} else {
