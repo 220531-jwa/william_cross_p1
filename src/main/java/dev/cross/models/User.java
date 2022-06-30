@@ -9,12 +9,13 @@ public class User {
 	private String pass;
 	private boolean manager;
 	private float reimburseUsed;
+	private int notif = 0;
 	
 	public User() {
 		super();
 	}
 	
-	public User(int id, String firstName, String lastName, String username, String pass, boolean manager, float reimburseUsed) {
+	public User(int id, String firstName, String lastName, String username, String pass, boolean manager, float reimburseUsed, int notif) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -23,6 +24,7 @@ public class User {
 		this.pass = pass;
 		this.manager = manager;
 		this.reimburseUsed = reimburseUsed;
+		this.notif = notif;
 	}
 	
 	public int getId() {
@@ -80,5 +82,15 @@ public class User {
 	public void setReimburseUsed(float reimburseUsed) {
 		this.reimburseUsed = reimburseUsed;
 	}
+
+	public int getNotif() {
+		return notif;
+	}
+
+	public void setNotif(int notif) {
+		this.notif = notif;
+	}
+	
+	
 	
 }

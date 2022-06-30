@@ -21,6 +21,7 @@ public class UserDAO {
 			ps.setString(4, u.getPass());
 			ps.setBoolean(5, u.isManager());
 			ps.setFloat(6, u.getReimburseUsed());
+			ps.setInt(7, u.getNotif());
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				u.setId(rs.getInt("id"));
@@ -50,7 +51,8 @@ public class UserDAO {
 						rs.getString("username"),
 						rs.getString("pass"),
 						rs.getBoolean("manager"),
-						rs.getInt("reimburse_used")
+						rs.getInt("reimburse_used"),
+						rs.getInt("notif")
 						);
 			}
 			
@@ -77,7 +79,8 @@ public class UserDAO {
 						rs.getString("username"),
 						rs.getString("pass"),
 						rs.getBoolean("manager"),
-						rs.getInt("reimburse_used")
+						rs.getFloat("reimburse_used"),
+						rs.getInt("notif")
 						);
 			}
 			
@@ -85,6 +88,24 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public boolean modifyUserNotif(User newUser) {
+		String sql = "update requestSystem.users set (notif)" + "= (?) where employee_id = ?";
+		try (Connection conn = cu.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, newUser.getNotif());
+			ps.setInt(2, newUser.getId());
+			
+			if (ps.executeUpdate() == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 }

@@ -57,6 +57,18 @@ public class RequestController {
 		}
 	}
 	
+	public static void getRequestManager(Context ctx) {
+		int id = Integer.parseInt(ctx.pathParam("requestId"));
+		RequestManagerView r = requestService.getRequestManager(id);
+		if (r != null) {
+			ctx.status(200);
+			ctx.json(r);
+		} else {
+			ctx.status(404);
+		}
+	}
+	
+	
 	public static void modifyRequest(Context ctx) {
 		Request request = ctx.bodyAsClass(Request.class);
 		request.setId(Integer.parseInt(ctx.pathParam("requestId")));

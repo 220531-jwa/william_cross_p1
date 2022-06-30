@@ -46,7 +46,7 @@ async function loadTable() {
 
                     button.onclick = function() {
                         sessionStorage.setItem("request", resp[i].id);
-                        window.location.assign("managerRequestView.html");
+                        window.location.assign("requestViewManager.html");
                     }
 
                     let desc = row.insertCell();

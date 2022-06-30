@@ -22,6 +22,10 @@ public class RequestService {
 		return requestDao.getRequest(id);
 	}
 	
+	public RequestManagerView getRequestManager(int id) {
+		return requestDao.getRequestManager(id);
+	}
+	
 	public List<RequestManagerView> getAllRequests() {
 		return requestDao.getRequestList();
 	}

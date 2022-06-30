@@ -49,6 +49,9 @@ public class ERSRunner {
 				path("/{requestId}", () ->{
 					get(RequestController::getRequest);
 					put(RequestController::modifyRequest);
+					path("/manager", () ->{
+						get(RequestController::getRequestManager);
+					});
 				});
 			});
 			
