@@ -6,10 +6,12 @@ if (user == null || !user.manager){
     window.location.assign("login.html");
 } 
 
+let uid = sessionStorage.getItem("request");
+
 async function loadRequest() {
     console.log("GO");
     
-    let uid = sessionStorage.getItem("request");
+    
 
     console.log(uid);
     
@@ -22,6 +24,11 @@ async function loadRequest() {
             .then((resp) => {
                 
                 console.log(resp); // this is where we will eventually put our DOM manipulation if needed
+
+                if (resp.approval != 'Pending') {
+                    buttons = document.getElementById('buttons');
+                    buttons.parentNode.removeChild(buttons);
+                }
 
                 var request = document.createElement('table');
 
@@ -48,6 +55,20 @@ async function loadRequest() {
                 desc.appendChild(document.createTextNode("Reimbursement Amount"));
                 val = money.insertCell();
                 val.appendChild(document.createTextNode(resp.money));
+                if (resp.money < resp.expected_funds) { 
+                    desc = money.insertCell();
+                    desc.appendChild(document.createTextNode("They are owed " + resp.expected_funds + ", but are only slated to recieve " + money));
+                }
+                let buttonSpace = money.insertCell();
+                let buttonText = "EDIT";
+                let button = document.createElement('button');
+                button.type = 'button';
+                button.innerHTML = buttonText;
+                button.onclick = function() {
+                    let newM = prompt("How much should they be paid?");
+                    updateMoney(resp);
+                }
+                buttonSpace.appendChild(button);
 
                 let approval = request.insertRow();
                 desc = approval.insertCell();
@@ -78,16 +99,6 @@ async function loadRequest() {
                 desc.appendChild(document.createTextNode("Grade"));
                 val = grade.insertCell();
                 val.appendChild(document.createTextNode(resp.grade));
-                let buttonSpace = grade.insertCell();
-                let buttonText = "EDIT";
-                let button = document.createElement('button');
-                button.type = 'button';
-                button.innerHTML = buttonText;
-                button.onclick = function() {
-                    let newG = prompt("What Grade Did You Recieve?");
-                    updateGrade(resp, newG);
-                }
-                buttonSpace.appendChild(button);
 
 
                 document.getElementById("request").appendChild(request);
@@ -97,6 +108,8 @@ async function loadRequest() {
             // .catch will execute if there's any error
             .catch((error) => {
                 console.log(error);
+                alert("Error: No Such Request");
+                window.location.assign("managerViewRequestList.html");
             });
 }
 
@@ -116,11 +129,9 @@ async function updateMoney(request, newMoney) {
     window.location.assign("requestView.html");
 }
 
-async function updateGrade(request, newGrade) {
-    request.grade = newGrade;
-
+async function approve(request) {
     let res = await fetch(
-        `${baseUrl}/requests/${request.id}`, {
+        `${baseUrl}/approve/${uid}`, {
             method: 'PUT', 
             headers: {
               'Content-Type': 'application/json'
@@ -129,5 +140,23 @@ async function updateGrade(request, newGrade) {
             body: JSON.stringify(request) // body data type must match "Content-Type" header
           });
 
-    window.location.assign("requestView.html");
+    window.location.assign("requestViewManager.html");
+}
+
+async function reject(request) {
+    let res = await fetch(
+        `${baseUrl}/reject/${uid}`, {
+            method: 'PUT', 
+            headers: {
+              'Content-Type': 'application/json'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(request) // body data type must match "Content-Type" header
+          });
+
+    window.location.assign("requestViewManager.html");
+}
+
+async function cancel() {
+    window.location.assign("managerViewRequestList.html");
 }

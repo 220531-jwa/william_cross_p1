@@ -80,7 +80,7 @@ public class RequestController {
 	}
 	
 	public static void approveRequest(Context ctx) {
-		int id = Integer.parseInt(ctx.pathParam("request"));
+		int id = Integer.parseInt(ctx.pathParam("requestId"));
 		if (requestService.approveRequest(id)) {
 			ctx.status(200);
 		} else {
@@ -89,7 +89,7 @@ public class RequestController {
 	}
 	
 	public static void rejectRequest(Context ctx) {
-		int id = Integer.parseInt(ctx.pathParam("request"));
+		int id = Integer.parseInt(ctx.pathParam("requestId"));
 		if (requestService.rejectRequest(id)) {
 			ctx.status(200);
 		} else {

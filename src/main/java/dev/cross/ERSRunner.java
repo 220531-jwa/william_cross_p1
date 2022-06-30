@@ -59,11 +59,11 @@ public class ERSRunner {
 				get(EventController::getEvent);
 			});
 			
-			path("/approve/{request}", () ->{
+			path("/approve/{requestId}", () ->{
 				put(RequestController::approveRequest);
 			});
 			
-			path("/reject/{request}", () ->{
+			path("/reject/{requestId}", () ->{
 				put(RequestController::rejectRequest);
 			});
 			

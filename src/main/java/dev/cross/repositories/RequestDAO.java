@@ -83,7 +83,7 @@ public class RequestDAO {
 				Approve_Type aT = null;
 				switch(a) {
 				case "Accepted":
-					aT = Approve_Type.Accepted;
+					aT = Approve_Type.Approved;
 					break;
 				case "Pending":
 					aT = Approve_Type.Pending;
@@ -154,7 +154,7 @@ public class RequestDAO {
 				Approve_Type aT = null;
 				switch(a) {
 				case "Accepted":
-					aT = Approve_Type.Accepted;
+					aT = Approve_Type.Approved;
 					break;
 				case "Pending":
 					aT = Approve_Type.Pending;
@@ -228,7 +228,7 @@ public class RequestDAO {
 				Approve_Type aT = null;
 				switch(a) {
 				case "Accepted":
-					aT = Approve_Type.Accepted;
+					aT = Approve_Type.Approved;
 					break;
 				case "Pending":
 					aT = Approve_Type.Pending;
@@ -264,7 +264,7 @@ public class RequestDAO {
 	}
 		
 	public List<RequestManagerView> getRequestList() {
-		String sql = "select * from requestsystem.requests, requestsystem.users where employee = employee_id and approval = 'Pending' order by request_id;";
+		String sql = "select * from requestsystem.requests, requestsystem.users where employee = employee_id and approval = 'Pending' order by start_date;";
 		ArrayList<RequestManagerView> r = new ArrayList<>();
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -298,7 +298,7 @@ public class RequestDAO {
 				Approve_Type aT = null;
 				switch(a) {
 				case "Accepted":
-					aT = Approve_Type.Accepted;
+					aT = Approve_Type.Approved;
 					break;
 				case "Pending":
 					aT = Approve_Type.Pending;
@@ -335,7 +335,7 @@ public class RequestDAO {
 	}
 	
 	public boolean modifyRequest(Request update) {
-		String sql = "update requestSystem.requests set (reimburse_amount, approval, grade, exceeds_funds, manager_notif, employee_notif)" + "= (?, ?::approve_type, ?) where request_id = ?";
+		String sql = "update requestSystem.requests set (reimburse_amount, approval, grade, exceeds_funds, manager_notif, employee_notif)" + "= (?, ?::approve_type, ?, ?, ?, ?) where request_id = ?";
 		try (Connection conn = cu.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setDouble(1, update.getMoney());

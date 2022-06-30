@@ -4,18 +4,22 @@ import java.util.List;
 
 import dev.cross.models.Request;
 import dev.cross.models.RequestManagerView;
+import dev.cross.models.User;
 import dev.cross.repositories.EventDAO;
 import dev.cross.repositories.RequestDAO;
+import dev.cross.repositories.UserDAO;
 import dev.cross.types.Approve_Type;
 
 public class RequestService {
 
 	private static RequestDAO requestDao;
 	private static EventDAO eventDao;
+	private static UserDAO userDao;
 	
-	public RequestService(RequestDAO u, EventDAO e) {
-		requestDao = u;
+	public RequestService(RequestDAO r, EventDAO e, UserDAO u) {
+		requestDao = r;
 		eventDao = e;
+		userDao = u;
 	}
 	
 	public Request getRequest(int id) {
@@ -54,14 +58,20 @@ public class RequestService {
 	
 	public boolean approveRequest(int id) {
 		Request r = requestDao.getRequest(id);
-		r.setApproval(Approve_Type.Accepted);
+		r.setApproval(Approve_Type.Approved);
 		return requestDao.modifyRequest(r);
 	}
 	
 	public boolean rejectRequest(int id) {
 		Request r = requestDao.getRequest(id);
 		r.setApproval(Approve_Type.Rejected);
-		return requestDao.modifyRequest(r);
+		if (requestDao.modifyRequest(r)) {
+			User u = userDao.getUserById(r.getEmployee_id());
+			u.setReimburseUsed((float)(u.getReimburseUsed() + r.getMoney()));
+			return userDao.modifyUserNotif(u);
+		} else {
+			return false;
+		}
 	}
 	
 }
