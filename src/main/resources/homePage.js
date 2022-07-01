@@ -8,8 +8,20 @@ if (user == null){
 } 
 console.log(user);
 let nameText = user.firstName + " " + user.lastName;
+let moneyRemaining = 1000 - user.reimburseUsed;
 console.log(nameText);
 document.getElementById("Hello").innerHTML = "Hello " + nameText + "!"; 
+document.getElementById("Name").innerHTML = nameText;
+document.getElementById("Message").innerHTML = "You have " + user.notif + " notifications and $" + moneyRemaining + " in reimbursements remaining this year." 
+
+async function homePage() {
+    window.location.assign("homePage.html");
+}
+
+async function logOut() {
+    sessionStorage.clear();
+    window.location.assign("login.html");
+}
 
 
 
