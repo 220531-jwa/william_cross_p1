@@ -9,6 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2"><div id="Name"></div></div>
+        <div class="col-md-2"><button type="button" class="btn btn-primary"  onclick="homePage()">Back to Home Page</button></div>
+        <div class="col-md-2"><button type="button" class="btn btn-primary"  onclick="logOut()">Log Out</button></div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row"><hr></div>
+    <div class="row"><br></div>
 
 
     <div class="row">
@@ -17,17 +26,29 @@
             <p>Please Fill In This Form to Submit a Request</p>
         </div>
     </div>
+    <div class="row"><br></div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-11">
             <label for="description"><b>What are you requesting reimbursement for?</b></label>
-            <input type="text" placeholder="Description" name="description" id= "description" required>
         </div>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-11">
+            <input type="text" placeholder="Description" name="description" id= "description" required>
+        </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
             <label for="Event_Type"><b>Event Category</b></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
             <select name="Event_Type" id="Event_Type" required>
                 <option value="University_Course">University Course</option>
                 <option value="Seminar">Seminar</option>
@@ -38,38 +59,62 @@
             </select>
         </div>
     </div>
+    <div class="row"><br></div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-11">
             <label for="total_value"><b>What is the total cost of the event?</b></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
             <input type="number" name="total_value" id="total_value" required>
             <button type="button" class="btn btn-primary"  onclick="calculate()">Calculate Reimburse Amount</button><div id="calculated"></div>
         </div>
     </div>
+    <div class="row"><br></div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-11">
             <label for="start"><b>When does your event start?</b></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
             <input type="date" name="start" id="start" required>
         </div>
     </div>
+    <div class="row"><br></div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-11">
             <label for="end"><b>When does your event end?</b></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
             <input type="date" name="end" id="end" required>
         </div>
     </div>
+    <div class="row"><br></div>
+    <div class="row"><br></div>
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-11">
+        <div class="col-md-2">
             <button type="button" class="btn btn-primary"  onclick="submit()">Submit Request</button>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary"  onclick="cancel()">Cancel Request</button>
         </div>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-11">
-            <button type="button" class="btn btn-primary"  onclick="cancel()">Cancel Request</button>
+            
         </div>
     </div>
 

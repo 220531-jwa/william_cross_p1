@@ -5,6 +5,19 @@ if (user == null){
     alert("Not logged in. Returning to Login Page");
     window.location.assign("login.html");
 } 
+console.log(user);
+let nameText = user.firstName + " " + user.lastName;
+console.log(nameText);
+document.getElementById("Name").innerHTML = nameText; 
+
+async function homePage() {
+    window.location.assign("homePage.html");
+}
+
+async function logOut() {
+    sessionStorage.clear();
+    window.location.assign("login.html");
+}
 
 async function submit() {
     let user = JSON.parse(sessionStorage.getItem("user"));
