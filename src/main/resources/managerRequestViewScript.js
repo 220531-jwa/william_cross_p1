@@ -6,6 +6,19 @@ if (user == null || !user.manager){
     window.location.assign("login.html");
 } 
 
+let nameText = "Manager: " + user.firstName + " " + user.lastName;
+console.log(nameText);
+document.getElementById("Name").innerHTML = nameText; 
+
+async function homePage() {
+    window.location.assign("managerHomePage.html");
+}
+
+async function logOut() {
+    sessionStorage.clear();
+    window.location.assign("login.html");
+}
+
 let uid = sessionStorage.getItem("request");
 
 async function loadRequest() {
